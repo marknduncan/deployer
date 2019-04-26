@@ -30,7 +30,7 @@ task('deploy:shared', function () {
 
             // If release contains shared dir, copy that dir from release to shared.
             if (test("[ -d $(echo {{release_path}}/$dir) ]")) {
-                run("cp -rv {{release_path}}/$dir $sharedPath/" . dirname(parse($dir)));
+                run("cp -r {{release_path}}/$dir $sharedPath/" . dirname(parse($dir)));
             }
         }
 
@@ -55,7 +55,7 @@ task('deploy:shared', function () {
         // and file exist in release
         if (!test("[ -f $sharedPath/$file ]") && test("[ -f {{release_path}}/$file ]")) {
             // Copy file in shared dir if not present
-            run("cp -rv {{release_path}}/$file $sharedPath/$file");
+            run("cp -r {{release_path}}/$file $sharedPath/$file");
         }
 
         // Remove from source.
